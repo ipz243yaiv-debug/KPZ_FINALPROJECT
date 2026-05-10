@@ -54,7 +54,8 @@
 
 - *Repository*: Абстрагує логіку роботи з SQLite. Класи UserRepository та MessageRepository дозволяють змінювати структуру БД без впливу на бізнес-логіку.
 
- [Файл: UserRepository.cs, MessageRepository.cs] (https://github.com/ipz243yaiv-debug/KPZ_FINALPROJECT/blob/main/ChatLibrary/DAL/UserRepository.cs), (https://github.com/ipz243yaiv-debug/KPZ_FINALPROJECT/blob/main/ChatLibrary/DAL/MessageRepository.cs)
+ [Файл: UserRepository.cs](https://github.com/ipz243yaiv-debug/KPZ_FINALPROJECT/blob/main/ChatLibrary/DAL/UserRepository.cs)
+ [Файл: MessageRepository.cs](https://github.com/ipz243yaiv-debug/KPZ_FINALPROJECT/blob/main/ChatLibrary/DAL/MessageRepository.cs)
 
 🔧 **Refactoring Techniques**
 
