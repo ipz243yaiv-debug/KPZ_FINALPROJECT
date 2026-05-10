@@ -1,4 +1,4 @@
-🚀 *Функціонал програми*
+🚀 **Функціонал програми**
 
 - Авторизація та Реєстрація: Повноцінна система акаунтів із хешуванням паролів та збереженням у базу даних SQLite.
 
@@ -12,7 +12,7 @@
 
 - Локальна історія: Збереження повідомлень у текстові файли для доступу до чату офлайн.
 
-🛠 *Запуск локально*
+🛠 **Запуск локально**
 
 1. Підготовка бази: Переконайтеся, що файл ChatDB.sqlite знаходиться в папці запуску сервера або бібліотеки DAL.
 
@@ -26,7 +26,7 @@
 
 6. Для тестування мультиплеєра запустіть декілька екземплярів Client.exe з папки bin/Debug.
 
-🏛 *Programming Principles*
+🏛 **Programming Principles**
 
 У проєкті реалізовано наступні принципи програмування:
 
@@ -40,7 +40,7 @@
 
 - *Encapsulation*: Всі внутрішні дані користувачів та логіка обробки повідомлень приховані за приватними полями та методами, доступ до яких здійснюється лише через публічні інтерфейси.
 
-🏗 *Design Patterns*
+🏗 **Design Patterns**
 
 Проєкт використовує такі патерни проєктування:
 
@@ -56,7 +56,7 @@
 
  [Файл: UserRepository.cs, MessageRepository.cs] (https://github.com/ipz243yaiv-debug/KPZ_FINALPROJECT/blob/main/ChatLibrary/DAL/UserRepository.cs), (https://github.com/ipz243yaiv-debug/KPZ_FINALPROJECT/blob/main/ChatLibrary/DAL/MessageRepository.cs)
 
-🔧 Refactoring Techniques
+🔧 **Refactoring Techniques**
 
 Під час розробки були застосовані такі техніки рефакторингу:
 
