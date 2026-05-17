@@ -9,7 +9,8 @@ namespace Client
     [CallbackBehavior(UseSynchronizationContext = false)]
     public class ChatServerConnector : IChatServiceCallback
     {
-        private static ChatServerConnector Instance = null;
+        private static readonly Lazy<ChatServerConnector> _instance =
+    new Lazy<ChatServerConnector>(() => new ChatServerConnector());
         private ChatServiceClient Client;
 
         public event Action<string> OnMessageReceived;
@@ -23,10 +24,9 @@ namespace Client
         }
 
         public static ChatServerConnector GetInstance()
-        {
-            if (Instance == null) Instance = new ChatServerConnector();
-            return Instance;
-        }
+            {
+            return _instance.Value;
+            }
 
         public int? Login(string username, string password)
         {
