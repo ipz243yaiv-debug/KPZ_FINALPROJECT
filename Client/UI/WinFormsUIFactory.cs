@@ -1,25 +1,15 @@
 ﻿using ChatLibrary.CustomUI; 
-using System;
 using System.Drawing;
 using System.Windows.Forms;
 
 namespace Client.UI
 {
-
-    public interface IUIFactory
-    {
-        Button CreateButton(string text, int x, int y, int width, int height);
-        TextBox CreateTextBox(int x, int y, int width);
-        Label CreateLabel(string text, int x, int y);
-        Panel CreatePanel(int x, int y, int width, int height, Color backColor);
-    }
-
     public class WinFormsUIFactory : IUIFactory
     {
  
         public Button CreateButton(string text, int x, int y, int width, int height)
         {
-            Console.WriteLine($"[UIFactory] Створення кастомної кнопки: {text} за координатами ({x}, {y})");
+
 
             return new CustomButton
             {
@@ -34,7 +24,7 @@ namespace Client.UI
  
         public TextBox CreateTextBox(int x, int y, int width)
         {
-            Console.WriteLine($"[UIFactory] Створення текстового поля за координатами ({x}, {y})");
+
 
             return new CustomTextBox
             {
@@ -49,7 +39,7 @@ namespace Client.UI
 
         public Label CreateLabel(string text, int x, int y)
         {
-            Console.WriteLine($"[UIFactory] Створення мітки: {text}");
+
 
             return new Label
             {
@@ -64,7 +54,7 @@ namespace Client.UI
 
         public Panel CreatePanel(int x, int y, int width, int height, Color backColor)
         {
-            Console.WriteLine($"[UIFactory] Створення панелі розміром {width}x{height}");
+
 
             return new Panel
             {
