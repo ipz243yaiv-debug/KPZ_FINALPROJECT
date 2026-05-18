@@ -285,17 +285,29 @@ namespace Client
 
         public void AddMessage(string message, bool isHistory)
         {
-            string targetChat = "Group";
-            bool isMine = false;
-            string displayMessage = message;
+            ParsedMessage parsed = ParseMessageContent(message);
+
+            EnsureUserInList(parsed.TargetChat);
+            ChatHistoryPanel panel = GetChatPanel(parsed.TargetChat);
+            panel.AddMessage(parsed.DisplayMessage, parsed.IsMine);
+
+            if (!isHistory)
+            {
+                _historyManager.Save(message);
+            }
+        }
+
+        private ParsedMessage ParseMessageContent(string message)
+        {
+            var result = new ParsedMessage { DisplayMessage = message };
 
             if (message.StartsWith("[Приватно від "))
             {
                 int endName = message.IndexOf("]:");
                 if (endName != -1)
                 {
-                    targetChat = message.Substring(14, endName - 14);
-                    displayMessage = message.Substring(endName + 2).Trim();
+                    result.TargetChat = message.Substring(14, endName - 14);
+                    result.DisplayMessage = message.Substring(endName + 2).Trim();
                 }
             }
             else if (message.StartsWith("[Ви для "))
@@ -303,9 +315,9 @@ namespace Client
                 int endName = message.IndexOf("]:");
                 if (endName != -1)
                 {
-                    targetChat = message.Substring(8, endName - 8);
-                    displayMessage = message.Substring(endName + 2).Trim();
-                    isMine = true;
+                    result.TargetChat = message.Substring(8, endName - 8);
+                    result.DisplayMessage = message.Substring(endName + 2).Trim();
+                    result.IsMine = true;
                 }
             }
             else if (message.StartsWith("[Файл відправлено до "))
@@ -313,9 +325,9 @@ namespace Client
                 int endName = message.IndexOf("]:");
                 if (endName != -1)
                 {
-                    targetChat = message.Substring(21, endName - 21);
-                    displayMessage = message.Substring(endName + 2).Trim();
-                    isMine = true;
+                    result.TargetChat = message.Substring(21, endName - 21);
+                    result.DisplayMessage = message.Substring(endName + 2).Trim();
+                    result.IsMine = true;
                 }
             }
             else if (message.StartsWith("[Файл від "))
@@ -323,27 +335,27 @@ namespace Client
                 int endName = message.IndexOf("]:");
                 if (endName != -1)
                 {
-                    targetChat = message.Substring(10, endName - 10);
-                    displayMessage = message.Substring(endName + 2).Trim();
+                    result.TargetChat = message.Substring(10, endName - 10);
+                    result.DisplayMessage = message.Substring(endName + 2).Trim();
                 }
             }
             else if (message.StartsWith("[Файл надіслано в групу]:"))
             {
-                isMine = true;
+                result.IsMine = true;
             }
             else
             {
-                isMine = message.StartsWith(_currentUsername + ":");
+                result.IsMine = message.StartsWith(_currentUsername + ":");
             }
 
-            EnsureUserInList(targetChat);
-            ChatHistoryPanel panel = GetChatPanel(targetChat);
-            panel.AddMessage(displayMessage, isMine);
+            return result;
+        }
 
-            if (!isHistory)
-            {
-                _historyManager.Save(message);
-            }
+        private class ParsedMessage
+        {
+            public string TargetChat { get; set; } = "Group";
+            public string DisplayMessage { get; set; }
+            public bool IsMine { get; set; } = false;
         }
 
         public void UpdateOnlineList(Dictionary<int, string> users)
